@@ -3,7 +3,6 @@ import moment from 'moment'
 import { Db, MongoClient, ObjectId } from 'mongodb'
 import path from 'path'
 
-import { generateLoginTokensData } from '../../src/api/tokens/tokens.helper'
 import config from '../../src/config'
 import { isDefined } from '../../src/helpers/object-helper'
 import { connect } from '../../src/services/mongo'
@@ -170,16 +169,9 @@ const dropMockData = async (db: Db) => {
   await db.dropDatabase()
 }
 
-const defineDefaultAuthorizationData = async (
-  db: Db,
-  personID = '649b8b3599eca595e449856d',
-  tenantID = config.mongo.mockDBName,
-) => {
-  const { accessToken } = await generateLoginTokensData(db, personID, tenantID)
-
+const convertToPubSubMessage = data => {
   return {
-    Authorization: accessToken,
-    'x-tenant-id': tenantID,
+    message: Buffer.from(JSON.stringify(data)),
   }
 }
 
@@ -190,6 +182,6 @@ export {
   dropTenantsMockData,
   insertMockData,
   dropMockData,
-  defineDefaultAuthorizationData,
   createIndexesMockData,
+  convertToPubSubMessage,
 }

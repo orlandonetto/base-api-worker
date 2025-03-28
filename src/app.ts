@@ -15,7 +15,7 @@ const app = express()
 
 app.use(
   cors({
-    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    methods: 'POST',
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Tenant-ID'],
     exposedHeaders: ['x-count'],
   }),
