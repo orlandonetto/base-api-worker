@@ -1,0 +1,129 @@
+import { Db, ObjectId } from 'mongodb'
+
+import { isDefined } from '../../helpers/object-helper'
+import {
+  buildPaginationPipeline,
+  getQueryStartWithAttributeString,
+  searchAttributeString,
+} from '../../helpers/query-helper'
+import { CollectionNames } from '../../types/global.enums'
+import { TypeExample } from './examples.types'
+
+const findExampleByID = async (db: Db, exampleID: string | ObjectId) => {
+  const collection = db.collection<TypeExample>(CollectionNames.Examples)
+
+  return collection.findOne({
+    _id: new ObjectId(exampleID.toString()),
+    deleted: false,
+  })
+}
+
+const insertExample = async (db: Db, example: TypeExample) => {
+  const collection = db.collection<TypeExample>(CollectionNames.Examples)
+
+  const { insertedId } = await collection.insertOne(example)
+  const exampleID = insertedId.toString()
+
+  return findExampleByID(db, exampleID)
+}
+
+const findAndCountExamples = async (db: Db, params) => {
+  const collection = db.collection<TypeExample>(CollectionNames.Examples)
+
+  const { limit, offset, sortBy, sortOrder } = params
+
+  const pipeline = []
+
+  // Match
+  pipeline.push({
+    $match: {
+      deleted: false,
+      ...(isDefined(params.search) && {
+        $or: [searchAttributeString('name', params.search)],
+      }),
+      ...(isDefined(params.name) &&
+        getQueryStartWithAttributeString('name', params.name)),
+      ...(isDefined(params.exampleIDs) && {
+        _id: {
+          $in: params.exampleIDs.map(id => new ObjectId(id.toString())),
+        },
+      }),
+    },
+  })
+
+  const paginationPipeline = buildPaginationPipeline({
+    offset,
+    limit,
+    sortBy,
+    sortOrder,
+  })
+
+  const result = await collection
+    .aggregate([...pipeline, ...paginationPipeline])
+    .toArray()
+  const [resultCount] = await collection
+    .aggregate([...pipeline, { $count: 'count' }])
+    .toArray()
+
+  return { result, count: resultCount?.count || 0 }
+}
+
+const updateExample = async (
+  db: Db,
+  exampleID: string | ObjectId,
+  example: TypeExample,
+) => {
+  const collection = db.collection<TypeExample>(CollectionNames.Examples)
+
+  return collection.findOneAndUpdate(
+    {
+      _id: new ObjectId(exampleID.toString()),
+      deleted: false,
+    },
+    {
+      $set: {
+        ...example,
+        updatedAt: new Date(),
+      },
+    },
+    { returnDocument: 'after' },
+  )
+}
+
+const deleteExample = async (db: Db, exampleID: string | ObjectId) => {
+  const collection = db.collection<TypeExample>(CollectionNames.Examples)
+
+  return collection.findOneAndUpdate(
+    {
+      _id: new ObjectId(exampleID.toString()),
+      deleted: false,
+    },
+    {
+      $set: {
+        deleted: true,
+        updatedAt: new Date(),
+      },
+    },
+    { returnDocument: 'after' },
+  )
+}
+
+const findExamplesByIDs = async (db: Db, exampleIDs: string[] | ObjectId[]) => {
+  const collection = db.collection<TypeExample>(CollectionNames.Examples)
+
+  return collection
+    .find({
+      _id: { $in: exampleIDs.map(id => new ObjectId(id.toString())) },
+      deleted: false,
+    })
+    .toArray()
+}
+
+export {
+  insertExample,
+  findExampleByID,
+  findAndCountExamples,
+  updateExample,
+  deleteExample,
+  findExamplesByIDs,
+}

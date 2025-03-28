@@ -1,0 +1,294 @@
+import { Db } from 'mongodb'
+import request from 'supertest'
+
+import {
+  connection,
+  getDBConnections,
+  insertTenantsMockData,
+  dropTenantsMockData,
+  insertMockData,
+  dropMockData,
+  defineDefaultAuthorizationData,
+} from '../../../test/utils'
+import app from '../../app'
+import * as helper from '../../helpers/object-helper'
+import * as dao from './examples.dao'
+
+let AuthorizationData
+let Databases: { db: Db; tenantsDB: Db }
+
+beforeAll(async () => {
+  app.locals.mongo = await connection()
+  Databases = getDBConnections(app.locals.mongo)
+  await insertTenantsMockData(Databases.tenantsDB)
+  await insertMockData(Databases.db)
+  AuthorizationData = await defineDefaultAuthorizationData(Databases.db)
+})
+
+afterAll(async () => {
+  await dropTenantsMockData(Databases.tenantsDB)
+  await dropMockData(Databases.db)
+  await app.locals.mongo.close(true)
+})
+
+describe('[POST] - /examples', () => {
+  const requestBody = {
+    name: 'Test Create',
+  }
+
+  it('should return 201 when is a valid request', async () => {
+    const response = await request(app)
+      .post('/examples')
+      .set(AuthorizationData)
+      .send(requestBody)
+
+    expect(response.status).toBe(201)
+    expect(response.body).toHaveProperty('_id')
+    expect(response.body).toHaveProperty('name', requestBody.name)
+    expect(response.body).toHaveProperty('deleted', false)
+    expect(response.body).toHaveProperty('createdAt')
+    expect(response.body).toHaveProperty('updatedAt')
+  })
+
+  it('should return 400 with invalid request body attributes', async () => {
+    const response = await request(app)
+      .post('/examples')
+      .set(AuthorizationData)
+      .send({
+        any_value: 'invalid_value',
+      })
+
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 500 with unexpected error ocurred', async () => {
+    jest.spyOn(dao, 'insertExample').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const response = await request(app)
+      .post('/examples')
+      .set(AuthorizationData)
+      .send(requestBody)
+
+    expect(response.status).toBe(500)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+})
+
+describe('[GET] - /examples', () => {
+  it('should return 200 without params', async () => {
+    const query = {}
+
+    const response = await request(app)
+      .get('/examples')
+      .query(query)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(200)
+    expect(response.body.length).toBeGreaterThan(1)
+  })
+
+  it('should return 200 with pagination params', async () => {
+    const query = {
+      limit: 1,
+      offset: 0,
+      sortBy: 'name',
+      sortOrder: 'asc',
+    }
+
+    const response = await request(app)
+      .get('/examples')
+      .query(query)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(200)
+    expect(Number(response.headers['x-count'])).toBeGreaterThan(query.limit)
+    expect(response.body.length).toBe(query.limit)
+  })
+
+  it('should return 400 with invalid params', async () => {
+    const response = await request(app)
+      .get('/examples')
+      .set(AuthorizationData)
+      .query({
+        value: 'invalid',
+      })
+
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 500 with unexpected error ocurred', async () => {
+    jest.spyOn(dao, 'findAndCountExamples').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const response = await request(app)
+      .get('/examples')
+      .set(AuthorizationData)
+      .query({
+        name: 'error 500',
+      })
+
+    expect(response.status).toBe(500)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+})
+
+describe('[GET] - /examples/:exampleID', () => {
+  it('should return 200 with params', async () => {
+    const exampleID = '65e10e9e89fa72c5088357e7'
+
+    const response = await request(app)
+      .get(`/examples/${exampleID}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(200)
+    expect(response.body).toHaveProperty('_id', exampleID)
+    expect(response.body).toHaveProperty('name')
+  })
+
+  it('should return 400 with invalid param', async () => {
+    const value = 'invalid value'
+
+    const response = await request(app)
+      .get(`/examples/${value}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 404 with not exists id', async () => {
+    const notFoundID = '649c42df4d6daf5a88bfde15'
+
+    const response = await request(app)
+      .get(`/examples/${notFoundID}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(404)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 500 with unexpected error ocurred', async () => {
+    jest.spyOn(helper, 'isNullOrUndefined').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const exampleID = '65e10ec44468e2e44f5b2bb8'
+
+    const response = await request(app)
+      .get(`/examples/${exampleID}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(500)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+})
+
+describe('[PUT] - /examples/:exampleID', () => {
+  const requestBody = {
+    name: 'Test Edit',
+  }
+
+  const exampleID = '65e10ec44468e2e44f5b2bb8'
+
+  it('should return 200 with all params', async () => {
+    const response = await request(app)
+      .put(`/examples/${exampleID}`)
+      .set(AuthorizationData)
+      .send(requestBody)
+
+    expect(response.status).toBe(200)
+    expect(response.body).toHaveProperty('_id', exampleID)
+  })
+
+  it('should return 400 with invalid request body attributes', async () => {
+    const response = await request(app)
+      .put(`/examples/${exampleID}`)
+      .set(AuthorizationData)
+      .send({
+        any_value: 'invalid_value',
+      })
+
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 404 with not exists id', async () => {
+    const nonExistentId = '649ca43ab949464d896bd54e'
+
+    const response = await request(app)
+      .put(`/examples/${nonExistentId}`)
+      .set(AuthorizationData)
+      .send(requestBody)
+
+    expect(response.status).toBe(404)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 500 with unexpected error ocurred', async () => {
+    jest.spyOn(dao, 'updateExample').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const response = await request(app)
+      .put(`/examples/${exampleID}`)
+      .set(AuthorizationData)
+      .send(requestBody)
+
+    expect(response.status).toBe(500)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+})
+
+describe('[DELETE] - /examples/:exampleID', () => {
+  const exampleID = '65e10edc52f426c769b55a60'
+
+  it('should return 204 with delete example', async () => {
+    const response = await request(app)
+      .delete(`/examples/${exampleID}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(204)
+  })
+
+  it('should return 400 with invalid id', async () => {
+    const invalid_id = 'invalid_id'
+
+    const response = await request(app)
+      .delete(`/examples/${invalid_id}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 404 with not exists id', async () => {
+    const nonExistentId = '649ca43ab949464d896bd54e'
+
+    const response = await request(app)
+      .delete(`/examples/${nonExistentId}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(404)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+
+  it('should return 500 with unexpected error ocurred', async () => {
+    const exampleID = '65e10ec44468e2e44f5b2bb8'
+
+    jest.spyOn(dao, 'deleteExample').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const response = await request(app)
+      .delete(`/examples/${exampleID}`)
+      .set(AuthorizationData)
+
+    expect(response.status).toBe(500)
+    expect(response.body).toHaveProperty('message', expect.any(String))
+  })
+})

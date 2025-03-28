@@ -1,0 +1,34 @@
+[
+  {
+    "_id": "672039bcb5b497471158c983",
+    "name": "Base Test",
+    "token": "90434ea812964afa989b01e267918ae5",
+    "active": true,
+    "deleted": false,
+    "credentials": {
+      "gcp": {
+        "bucket": {
+          "name": "storage-base-test"
+        },
+        "file": {
+          "type": "service_account",
+          "project_id": "base-test",
+          "private_key_id": "base-test",
+          "private_key": "-----BEGIN PRIVATE KEY-----\n-----END PRIVATE KEY-----\n",
+          "client_email": "base-test@example.com",
+          "client_id": "base-test",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gainmes-test%40gainmes-test.iam.gserviceaccount.com",
+          "universe_domain": "googleapis.com"
+        }
+      }
+    },
+    "settings": {
+      "defaultPermissionGroupID": "65d9fd7b83bbd487fdef2d66",
+      "requiredMajority": true
+    },
+    "tenantID": "base-test"
+  }
+]

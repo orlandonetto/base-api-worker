@@ -1,0 +1,17 @@
+import { ObjectId } from 'mongodb'
+
+type TypeExample = {
+  _id?: ObjectId | string
+  name?: string
+  // ...
+  deleted?: boolean
+  createdAt?: Date
+  updatedAt?: Date
+}
+
+type TypeExampleRef = {
+  _id?: ObjectId | string
+  name?: string
+}
+
+export { TypeExample, TypeExampleRef }

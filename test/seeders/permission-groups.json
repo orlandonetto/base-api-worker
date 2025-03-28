@@ -1,0 +1,54 @@
+[
+  {
+    "_id": "65d9f72b468ad449f5f5b451",
+    "name": "Master",
+    "deleted": false,
+    "admin": true,
+    "permissions": [
+      {
+        "module": "people",
+        "active": true,
+        "permissions": ["people.create", "people.edit", "people.delete"]
+      },
+      {
+        "module": "permission-groups",
+        "active": true,
+        "permissions": [
+          "permission-groups.create",
+          "permission-groups.edit",
+          "permission-groups.delete"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "65d9fd7b83bbd487fdef2d66",
+    "name": "User",
+    "deleted": false,
+    "default": true,
+    "permissions": [
+      {
+        "module": "people",
+        "active": false,
+        "permissions": []
+      },
+      {
+        "module": "permission-groups",
+        "active": false,
+        "permissions": []
+      }
+    ]
+  },
+  {
+    "_id": "65d9fd80f8bd71390ec3f04e",
+    "name": "Tester",
+    "deleted": false,
+    "permissions": [
+      {
+        "module": "people",
+        "active": false,
+        "permissions": ["people.create", "people.edit", "people.delete"]
+      }
+    ]
+  }
+]

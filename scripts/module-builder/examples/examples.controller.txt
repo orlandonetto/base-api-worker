@@ -1,0 +1,133 @@
+import { Request, Response } from 'express'
+
+import AppError from '../../errors/AppError'
+import { HttpStatus } from '../../types/global.enums'
+import {
+  deleteExample,
+  findAndCountExamples,
+  insertExample,
+  updateExample,
+} from './examples.dao'
+import { mapExample } from './examples.helper'
+
+const createExample = async (request: Request, response: Response) => {
+  const { db, messages, body } = request
+
+  try {
+    const mapped = mapExample(body)
+
+    const example = await insertExample(db, mapped)
+
+    response.status(HttpStatus.Created).json(example)
+  } catch (error) {
+    if (error instanceof AppError) {
+      throw error
+    }
+
+    throw new AppError(
+      messages.errors.examples.POST[500],
+      error,
+      HttpStatus.InternalServerError,
+    )
+  }
+}
+
+const fetchExample = async (request: Request, response: Response) => {
+  const {
+    messages,
+    locals: { example },
+  } = request
+
+  try {
+    response.status(HttpStatus.Ok).json(example)
+  } catch (error) {
+    if (error instanceof AppError) {
+      throw error
+    }
+
+    throw new AppError(
+      messages.errors.examples.GET[500],
+      error,
+      HttpStatus.InternalServerError,
+    )
+  }
+}
+
+const fetchExamples = async (request: Request, response: Response) => {
+  const { db, messages, query } = request
+
+  try {
+    const { result, count } = await findAndCountExamples(db, query)
+
+    response.set('x-count', count)
+
+    response.status(HttpStatus.Ok).json(result)
+  } catch (error) {
+    if (error instanceof AppError) {
+      throw error
+    }
+
+    throw new AppError(
+      messages.errors.examples.LIST[500],
+      error,
+      HttpStatus.InternalServerError,
+    )
+  }
+}
+
+const editExample = async (request: Request, response: Response) => {
+  const { db, messages, body, locals } = request
+
+  try {
+    const { example } = locals
+
+    const updatedExample = await updateExample(db, example._id, {
+      ...example,
+      ...body,
+    })
+
+    response.status(HttpStatus.Ok).json(updatedExample)
+  } catch (error) {
+    if (error instanceof AppError) {
+      throw error
+    }
+
+    throw new AppError(
+      messages.errors.examples.PUT[500],
+      error,
+      HttpStatus.InternalServerError,
+    )
+  }
+}
+
+const removeExample = async (request: Request, response: Response) => {
+  const {
+    db,
+    messages,
+    locals: { example },
+  } = request
+
+  try {
+    await deleteExample(db, example._id)
+
+    response.status(HttpStatus.NoContent).end()
+  } catch (error) {
+    if (error instanceof AppError) {
+      throw error
+    }
+
+    throw new AppError(
+      messages.errors.examples.DELETE[500],
+      error,
+      HttpStatus.InternalServerError,
+    )
+  }
+}
+
+export {
+  createExample,
+  fetchExample,
+  fetchExamples,
+  editExample,
+  removeExample,
+}

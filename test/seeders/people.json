@@ -1,0 +1,229 @@
+[
+  {
+    "_id": "649b8b3599eca595e449856d",
+    "name": "John Doe",
+    "email": "john.doe@test.com",
+    "cpf": "12312312301",
+    "password": "$2b$10$FP3EFbwX0.XuE5f1RtZIDea5iikQguiEb38kUDHqF4Fn4/mNGP3KS",
+    "photo": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+    "permissionGroups": [
+      {
+        "_id": "65d9f72b468ad449f5f5b451",
+        "name": "Master"
+      }
+    ],
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64cc12d6ad8f70b4a541674e",
+    "name": "James Bond",
+    "email": "james.bond@test.com",
+    "cpf": "12312312302",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64cc11c659ec90c66133d5e5",
+    "name": "Atendente Fulano",
+    "email": "fulano@email.com",
+    "cpf": "12312312303",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64cc27cc6c7e8eee55ac0c92",
+    "name": "Atendente Cicrano",
+    "email": "cicrano@email.com",
+    "cpf": "12312312304",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9f72b468ad449f5f5b451",
+        "name": "Master"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64cc2945740d79af51c085e7",
+    "name": "Atendente Maria",
+    "email": "maria@email.com",
+    "cpf": "12312312305",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9f72b468ad449f5f5b451",
+        "name": "Master"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "649c1a0ceb77fcd3ca5f6919",
+    "name": "people 2",
+    "email": "peopl2e@test.com",
+    "cpf": "12312312306",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "en-US",
+    "deleted": false
+  },
+  {
+    "_id": "649c1a17a7191c879a062632",
+    "name": "people 3",
+    "email": "peopl3e@test.com",
+    "cpf": "12312312307",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64c03185e27afb1fa13f972b",
+    "name": "User is not Type Admin TEST",
+    "email": "user@test.com",
+    "cpf": "12312312308",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64cc25421c598923524a4f38",
+    "name": "User DELETE TEST",
+    "email": "user@test.com",
+    "cpf": "12312312309",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64d281ecf4cb50610d25a4e1",
+    "name": "User GET By Status TEST",
+    "email": "user@test.com",
+    "cpf": "12312312310",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64de988564bdd21aa8476f2b",
+    "name": "Requester Already Registered",
+    "email": "requester@test.com",
+    "cpf": "12312312311",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "phone": "(99) 99999-9999",
+    "photo": null,
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64f0ebe3f60c8f9ba44a450e",
+    "name": "Logged Requester",
+    "email": "requester.logged@test.com",
+    "cpf": "12312312312",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "phone": "(99) 99999-9999",
+    "photo": null,
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64f0efcc69e790f8ebe8311c",
+    "name": "Test dashboard",
+    "email": "user@test.com",
+    "cpf": "12312312313",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "photo": null,
+    "language": "pt-BR",
+    "deleted": false
+  },
+  {
+    "_id": "64f231c1097b2129d19a10fd",
+    "name": "Requester TEST for /me Route",
+    "email": "requester.me@test.com",
+    "cpf": "12312312314",
+    "password": "$2b$10$3EW0bUxPnlztXsd0cthR3ehT9XP8mjXGWO7okCZ/xgmYf8G5ae3xe",
+    "phone": "81999999999",
+    "photo": null,
+    "permissionGroups": [
+      {
+        "_id": "65d9fd7b83bbd487fdef2d66",
+        "name": "User"
+      }
+    ],
+    "language": "pt-BR",
+    "deleted": false
+  }
+]
