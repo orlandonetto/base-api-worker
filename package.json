@@ -1,7 +1,7 @@
 {
-  "name": "zextify-api-base-ts",
+  "name": "base-api-worker",
   "version": "1.0.0",
-  "description": "API base para projetos em typescript",
+  "description": "API worker base para projetos em typescript que utilizarão o Pub/Sub do Google Cloud",
   "main": "./dist/server.js",
   "type": "module",
   "scripts": {
@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zextify/zextify-api-base-ts.git"
+    "url": "git+https://github.com/orlandonetto/base-api-worker.git"
   },
   "keywords": [
-    "zextify",
     "api",
     "template",
+    "worker",
     "base",
     "express",
     "typescript",
@@ -31,22 +31,19 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "author": "zextify",
+  "author": "orlandonetto",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zextify/zextify-api-base-ts/issues"
+    "url": "https://github.com/orlandonetto/base-api-worker/issues"
   },
-  "homepage": "https://github.com/zextify/zextify-api-base-ts#readme",
+  "homepage": "https://github.com/orlandonetto/base-api-worker#readme",
   "dependencies": {
+    "@google-cloud/pubsub": "^4.10.0",
     "@google-cloud/storage": "^7.15.2",
-    "axios": "^1.8.4",
-    "bcrypt": "^5.1.1",
-    "celebrate": "^15.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
-    "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
     "mongodb": "^6.15.0",
     "morgan": "^1.10.0",
@@ -54,7 +51,6 @@
     "node-cache": "^5.1.2",
     "nodemailer": "^6.10.0",
     "recursive-diff": "^1.0.9",
-    "typescript-eslint": "^8.28.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
@@ -77,11 +73,11 @@
     "eslint-plugin-prettier": "^5.2.5",
     "eslint-plugin-promise": "^7.2.1",
     "jest": "^29.7.0",
-    "pluralize": "^8.0.0",
     "prettier": "^3.5.3",
     "supertest": "^7.1.0",
     "ts-jest": "^29.3.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0"
   }
 }

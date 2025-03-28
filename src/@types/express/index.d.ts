@@ -7,10 +7,9 @@ declare namespace Express {
     tenantsDB: import('mongodb').Db
     tenantID: string
     company: import('../../api/companies/companies.types').TypeCompany
-    person: import('../../api/people/people.types').TypePerson
+    person?: import('../../api/people/people.types').TypePerson
     locals: any
-    file?: Multer.File
-    files?: Multer.File[]
+    data?: import('../../types/global.types').TypeRequestData
   }
 }
 

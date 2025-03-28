@@ -5,87 +5,18 @@ type TypeMessages = {
     403: string
     404: string
     500: string
+    message: {
+      400: string
+    }
     tenants: {
       401: string
       404: string
-    }
-    auth: {
-      409: string
-      local: {
-        signUp: {
-          500: string
-        }
-        404: string
-        500: string
-      }
-      GET: {
-        500: string
-      }
     }
     company: {
       404: string
     }
     people: {
-      403: string
-      404: string
-      409: string
       POST: {
-        500: string
-      }
-      GET: {
-        500: string
-      }
-      LIST: {
-        500: string
-      }
-      PUT: {
-        500: string
-      }
-      DELETE: {
-        500: string
-      }
-      validations: {
-        requiredMajority: string
-      }
-    }
-    permissions: {
-      403: string
-    }
-    permissionGroups: {
-      404: string
-      POST: {
-        500: string
-      }
-      LIST: {
-        500: string
-      }
-      GET: {
-        500: string
-      }
-      PUT: {
-        500: string
-      }
-      DELETE: {
-        500: string
-      }
-    }
-    tokens: {
-      401: string
-      404: string
-      409: string
-      POST: {
-        500: string
-      }
-      GET: {
-        500: string
-      }
-      LIST: {
-        500: string
-      }
-      PUT: {
-        500: string
-      }
-      DELETE: {
         500: string
       }
     }
@@ -112,4 +43,11 @@ type TypeAddress = {
   zipCode: string
 }
 
-export { TypeMessages, TypeAddress }
+type TypeRequestData = {
+  personID?: string
+  tenantID?: string
+  from?: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  to?: any // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+export { TypeMessages, TypeAddress, TypeRequestData }

@@ -6,36 +6,8 @@
     "404": "Recurso não encontrado",
     "409": "Recurso duplicado",
     "500": "Ocorreu um erro inesperado",
-    "auth": {
-      "409": "Conta já existente",
-      "local": {
-        "signUp": {
-          "500": "Ocorreu um erro ao tentar criar uma conta"
-        },
-        "404": "Sua conta nao foi encontrada",
-        "500": "Ocorreu um erro ao tentar autenticar"
-      },
-      "GET": {
-        "500": "Ocorreu um erro ao tentar obter os dados de autenticação"
-      }
-    },
-    "examples": {
-      "404": "Exemplo não encontrado",
-      "POST": {
-        "500": "Ocorreu um erro ao tentar criar exemplo"
-      },
-      "LIST": {
-        "500": "Ocorreu um erro ao tentar obter exemplos"
-      },
-      "GET": {
-        "500": "Ocorreu um erro ao tentar obter exemplo"
-      },
-      "PUT": {
-        "500": "Ocorreu um erro ao tentar atualizar exemplo"
-      },
-      "DELETE": {
-        "500": "Ocorreu um erro ao tentar deletar exemplo"
-      }
+    "message": {
+      "400": "Mensagem do pub sub inválida"
     },
     "tenants": {
       "401": "Header X-Tenant-ID Inválido ou não informado",
@@ -45,67 +17,8 @@
       "404": "Dados da Empresa não encontrada"
     },
     "people": {
-      "403": "Pessoa não autorizada",
-      "404": "Pessoa não encontrada",
-      "409": "Pessoa já existente na base de dados",
       "POST": {
-        "500": "Ocorreu um erro ao tentar criar uma pessoa"
-      },
-      "GET": {
-        "500": "Ocorreu um erro ao tentar obter uma pessoa"
-      },
-      "LIST": {
-        "500": "Ocorreu um erro ao tentar listar as pessoas"
-      },
-      "PUT": {
-        "500": "Ocorreu um erro ao tentar atualizar uma pessoa"
-      },
-      "DELETE": {
-        "500": "Ocorreu um erro ao tentar deletar uma pessoa"
-      },
-      "validations": {
-        "requiredMajority": "Você deve ter mais de 18 anos para se cadastrar no sistema"
-      }
-    },
-    "permissions": {
-      "403": "Voce não tem permissão para realizar essa ação"
-    },
-    "permissionGroups": {
-      "404": "Grupo de Permissão não encontrado",
-      "POST": {
-        "500": "Ocorreu um erro ao tentar criar um grupo de permissão"
-      },
-      "LIST": {
-        "500": "Ocorreu um erro ao tentar obter os grupos de permissão"
-      },
-      "GET": {
-        "500": "Ocorreu um erro ao tentar obter um grupo de permissão"
-      },
-      "PUT": {
-        "500": "Ocorreu um erro ao tentar atualizar um grupo de permissão"
-      },
-      "DELETE": {
-        "500": "Ocorreu um erro ao tentar deletar um grupo de permissão"
-      }
-    },
-    "tokens": {
-      "401": "Token de autorização inválido.",
-      "404": "Token não encontrado",
-      "409": "Token já existente na base de dados",
-      "POST": {
-        "500": "Ocorreu um erro ao tentar criar um token"
-      },
-      "GET": {
-        "500": "Ocorreu um erro ao tentar obter um token"
-      },
-      "LIST": {
-        "500": "Ocorreu um erro ao tentar listar os tokens"
-      },
-      "PUT": {
-        "500": "Ocorreu um erro ao tentar atualizar um token"
-      },
-      "DELETE": {
-        "500": "Ocorreu um erro ao tentar deletar um token"
+        "500": "Ocorreu um erro ao tentar realizar o processamento após a criação da pessoa"
       }
     }
   },

@@ -5,13 +5,12 @@ export const UnauthenticatedRoutes = [
   '/auth/local/sign-up',
 ]
 
-export const AllowedUnauthenticatedRoutes = [{ path: '/auth', method: 'POST' }]
-
 export enum CollectionNames {
   Companies = 'companies',
   Tokens = 'tokens',
   People = 'people',
   PermissionGroups = 'permission-groups',
+  AuditLogs = 'audit-logs',
 }
 
 export enum HttpStatus {
@@ -51,4 +50,8 @@ export enum Permissions {
   PermissionGroupsCreate = 'permission-groups.create',
   PermissionGroupsEdit = 'permission-groups.edit',
   PermissionGroupsDelete = 'permission-groups.delete',
+}
+
+export enum TopicNames {
+  PeoplePost = 'people.post',
 }

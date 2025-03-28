@@ -6,36 +6,8 @@
     "404": "Resource not found",
     "409": "Duplicate resource",
     "500": "An unexpected error occurred",
-    "auth": {
-      "409": "Account already existing",
-      "local": {
-        "signUp": {
-          "500": "An error occurred while trying to create an account"
-        },
-        "404": "Your account was not invited, contact an administrator.",
-        "500": "An error occurred while trying to authenticate"
-      },
-      "GET": {
-        "500": "An error occurred while trying to get the authentication data"
-      }
-    },
-    "examples": {
-      "404": "Example not found",
-      "POST": {
-        "500": "An error occurred while trying to create an example"
-      },
-      "LIST": {
-        "500": "An error occurred while trying to list examples"
-      },
-      "GET": {
-        "500": "An error occurred while trying to get an example"
-      },
-      "PUT": {
-        "500": "An error occurred while trying to update an example"
-      },
-      "DELETE": {
-        "500": "An error occurred while trying to delete an example"
-      }
+    "message": {
+      "400": "Invalid message of pubsub"
     },
     "tenants": {
       "401": "Invalid header X-Tenant-ID",
@@ -45,67 +17,8 @@
       "404": "Company not found"
     },
     "people": {
-      "403": "person not authorized",
-      "404": "person not found",
-      "409": "person already existing in the database",
       "POST": {
-        "500": "An error occurred while trying to create a person"
-      },
-      "GET": {
-        "500": "An error occurred while trying to get a person"
-      },
-      "LIST": {
-        "500": "An error occurred while trying to list people"
-      },
-      "PUT": {
-        "500": "An error occurred while trying to update a person"
-      },
-      "DELETE": {
-        "500": "An error occurred while trying to delete a person"
-      },
-      "validations": {
-        "requiredMajority": "You must be at least 18 years old"
-      }
-    },
-    "permissions": {
-      "403": "You do not have permission to access this resource"
-    },
-    "permissionGroups": {
-      "404": "Permission group not found",
-      "POST": {
-        "500": "An error occurred while trying to create a permission group"
-      },
-      "LIST": {
-        "500": "An error occurred while trying to list permission groups"
-      },
-      "GET": {
-        "500": "An error occurred while trying to get a permission group"
-      },
-      "PUT": {
-        "500": "An error occurred while trying to update a permission group"
-      },
-      "DELETE": {
-        "500": "An error occurred while trying to delete a permission group"
-      }
-    },
-    "tokens": {
-      "401": "Authorization token is invalid",
-      "404": "Token not found",
-      "409": "Token already exists in database",
-      "POST": {
-        "500": "An error occurred while trying to create an token"
-      },
-      "GET": {
-        "500": "An error occurred while trying to get an token"
-      },
-      "LIST": {
-        "500": "An error occurred while trying to list tokens"
-      },
-      "PUT": {
-        "500": "An error occurred while trying to update an token"
-      },
-      "DELETE": {
-        "500": "An error occurred while trying to delete an token"
+        "500": "An error occurred while trying to process the creation of the person"
       }
     }
   },

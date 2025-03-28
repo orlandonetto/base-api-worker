@@ -1,4 +1,3 @@
-import { isCelebrateError } from 'celebrate'
 import { NextFunction, Request, Response } from 'express'
 
 import AppError from '../errors/AppError'
@@ -10,8 +9,6 @@ const exceptionHandler = (
   res: Response,
   _: NextFunction,
 ) => {
-  const { messages } = req
-
   if (err?.stack && process.env.NODE_ENV !== 'test') {
     console.log(err.stack) // eslint-disable-line no-console
   }
@@ -25,30 +22,10 @@ const exceptionHandler = (
     return
   }
 
-  if (isCelebrateError(err)) {
-    const message = messages.errors[400]
-    const details = Array.from(err.details.entries()).map(
-      ([segment, joiError]) => ({
-        source: segment,
-        keys: joiError.details,
-        message: joiError.message,
-      }),
-    )
-
-    console.log(message) // eslint-disable-line no-console
-    details.forEach(detail => console.log(detail)) // eslint-disable-line no-console
-
-    res.status(HttpStatus.BadRequest).json({
-      message,
-      details,
-    })
-    return
-  }
-
   // Caso ocorra algum erro inesperado, retornar um erro 500
   res
     .status(HttpStatus.InternalServerError)
-    .json({ message: 'Erro interno do servidor' }) // TODO: i18n
+    .json({ message: 'Erro interno do servidor' })
 }
 
 const notFoundHandler = (req, res, next) => {
