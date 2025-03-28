@@ -71,11 +71,13 @@ async function setupPubSub(company: TypeCompany) {
 }
 
 const run = async () => {
-  const { companies = [] } = await setupCompanies()
+  const { mongoConnection, companies = [] } = await setupCompanies()
 
   for await (const company of companies) {
     await setupPubSub(company).catch(console.error) // eslint-disable-line no-console
   }
+
+  await mongoConnection.close()
 }
 
 ;(async () => {
