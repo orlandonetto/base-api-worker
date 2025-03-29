@@ -24,12 +24,6 @@ const extractAuthorizationData = async (
   const messages = getMessages()
 
   try {
-    const tenantsDBName = getTenantsDBName()
-    const tenantsDB = await request.app.locals.mongo.db(tenantsDBName)
-
-    request.messages = messages
-    request.tenantsDB = tenantsDB
-
     const { message } = request.body
     if (!message?.data) {
       throw new AppError(
@@ -38,6 +32,12 @@ const extractAuthorizationData = async (
         HttpStatus.BadRequest,
       )
     }
+
+    const tenantsDBName = getTenantsDBName()
+    const tenantsDB = await request.app.locals.mongo.db(tenantsDBName)
+
+    request.messages = messages
+    request.tenantsDB = tenantsDB
 
     const data = JSON.parse(Buffer.from(message.data, 'base64').toString())
     const { tenantID, personID } = data

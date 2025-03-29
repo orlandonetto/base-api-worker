@@ -1,3 +1,7 @@
+import { ObjectId } from 'mongodb'
+
+import { TopicNames } from './global.enums'
+
 type TypeMessages = {
   errors?: {
     400: string
@@ -43,11 +47,12 @@ type TypeAddress = {
   zipCode: string
 }
 
-type TypeRequestData = {
-  personID?: string
-  tenantID?: string
-  from?: any // eslint-disable-line @typescript-eslint/no-explicit-any
-  to?: any // eslint-disable-line @typescript-eslint/no-explicit-any
+type TypePubSubMessage = {
+  topic: TopicNames
+  personID: string | ObjectId
+  tenantID: string
+  from: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  to: any // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
-export { TypeMessages, TypeAddress, TypeRequestData }
+export { TypeMessages, TypeAddress, TypePubSubMessage }

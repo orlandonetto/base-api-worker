@@ -9,7 +9,7 @@ declare namespace Express {
     company: import('../../api/companies/companies.types').TypeCompany
     person?: import('../../api/people/people.types').TypePerson
     locals: any
-    data?: import('../../types/global.types').TypeRequestData
+    data?: import('../../types/global.types').TypePubSubMessage
   }
 }
 

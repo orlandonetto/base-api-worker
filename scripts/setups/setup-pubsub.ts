@@ -2,7 +2,7 @@ import { PubSub } from '@google-cloud/pubsub'
 
 import { TypeCompany } from '../../src/api/companies/companies.types'
 import { TopicNames } from '../../src/types/global.enums' // Importa os tópicos definidos no enum
-import setupCompanies from './setup-companies'
+import { getCompaniesAndConnection } from '../utils'
 
 const DEAD_LETTER_SUFFIX = '-dlq' // Sufixo para Dead Letter Topic
 const MAX_RETRIES = 3 // Número máximo de tentativas antes de enviar para o DLQ
@@ -71,7 +71,7 @@ async function setupPubSub(company: TypeCompany) {
 }
 
 const run = async () => {
-  const { mongoConnection, companies = [] } = await setupCompanies()
+  const { mongoConnection, companies = [] } = await getCompaniesAndConnection()
 
   for await (const company of companies) {
     await setupPubSub(company).catch(console.error) // eslint-disable-line no-console
