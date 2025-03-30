@@ -7,6 +7,11 @@ import config from '../../src/config'
 import { isDefined } from '../../src/helpers/object-helper'
 import { connect } from '../../src/services/mongo'
 import { CollectionNames } from '../../src/types/global.enums'
+import CompaniesMock from '../seeders/tenants/companies.json'
+
+const getTestTenantID = (): string => {
+  return CompaniesMock[0].tenantID
+}
 
 const connection = async () => {
   const { options, host } = config.mongo
@@ -74,6 +79,12 @@ const mapMockData = e => ({
       ...o,
       _id: new ObjectId(o._id),
     })),
+  }),
+  ...(isDefined(e.item) && {
+    item: {
+      ...e.item,
+      _id: new ObjectId(e.item._id),
+    },
   }),
   ...(isDefined(e.items) && {
     items: e.items.map(i => ({
@@ -170,8 +181,13 @@ const dropMockData = async (db: Db) => {
 }
 
 const convertToPubSubMessage = data => {
+  const payload = {
+    tanantID: getTestTenantID(),
+    ...data,
+  }
+
   return {
-    message: Buffer.from(JSON.stringify(data)),
+    message: Buffer.from(JSON.stringify(payload)),
   }
 }
 
@@ -184,4 +200,5 @@ export {
   dropMockData,
   createIndexesMockData,
   convertToPubSubMessage,
+  getTestTenantID,
 }

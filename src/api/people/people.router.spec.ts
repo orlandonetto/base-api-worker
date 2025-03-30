@@ -31,7 +31,6 @@ describe('[POST] - /people/post', () => {
   const defaultData = {
     topic: 'people.post',
     personID: '649b8b3599eca595e449856d',
-    tenantID: 'base-test',
     from: null,
     to: {
       email: 'create201@gmail.com',

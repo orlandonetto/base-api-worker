@@ -48,11 +48,10 @@ type TypeAddress = {
 }
 
 type TypePubSubMessage = {
-  topic: TopicNames
-  personID: string | ObjectId
-  tenantID: string
-  from: any // eslint-disable-line @typescript-eslint/no-explicit-any
-  to: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  topic?: TopicNames
+  personID?: string | ObjectId
+  tenantID?: string
+  from?: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  to?: any // eslint-disable-line @typescript-eslint/no-explicit-any
 }
-
 export { TypeMessages, TypeAddress, TypePubSubMessage }
