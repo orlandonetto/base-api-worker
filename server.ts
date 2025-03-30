@@ -13,8 +13,6 @@ setImmediate(async () => {
   // Initialize mailer transporter
   // import('./src/services/email')
 
-  if (require.main !== module) return
-
   const { port } = config
   const message = `API initialized on port ${port}`
 

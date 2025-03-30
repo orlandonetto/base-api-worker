@@ -13,6 +13,12 @@ export enum CollectionNames {
   AuditLogs = 'audit-logs',
 }
 
+export enum TopicNames {
+  PeoplePost = 'people.post',
+  PeoplePut = 'people.put',
+  // ...
+}
+
 export enum HttpStatus {
   Ok = 200,
   Created = 201,
@@ -50,8 +56,4 @@ export enum Permissions {
   PermissionGroupsCreate = 'permission-groups.create',
   PermissionGroupsEdit = 'permission-groups.edit',
   PermissionGroupsDelete = 'permission-groups.delete',
-}
-
-export enum TopicNames {
-  PeoplePost = 'people.post',
 }

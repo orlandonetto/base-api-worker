@@ -9,7 +9,7 @@ const getCompaniesAndConnection = async (): Promise<{
   companies: TypeCompany[]
 }> => {
   const {
-    mongo: { mockTenantsDBName, options },
+    mongo: { tenantsDBName, options },
   } = config
 
   const mongoConnection = await connect({
@@ -17,7 +17,7 @@ const getCompaniesAndConnection = async (): Promise<{
     options,
   })
 
-  const db = mongoConnection.db(mockTenantsDBName)
+  const db = mongoConnection.db(tenantsDBName)
 
   const companies = await db
     .collection<TypeCompany>('companies')

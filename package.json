@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "API worker base para projetos em typescript que utilizarão o Pub/Sub do Google Cloud",
   "main": "./dist/server.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify -r tsconfig-paths/register server.ts",
-    "tsc": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify -r tsconfig-paths/register",
+    "dev": "tsx watch server.ts",
+    "tsx": "tsx",
     "build": "tsc && docker build -t base-api-ts . && docker tag base-api-ts gcr.io/zextify-dev/base-api-ts && docker push gcr.io/zextify-dev/base-api-ts",
     "deploy": "gcloud run deploy base-api-ts --image gcr.io/zextify-dev/base-api-ts --platform managed --port 5000 --allow-unauthenticated --region southamerica-east1",
     "lint": "eslint src",
@@ -76,7 +76,7 @@
     "prettier": "^3.5.3",
     "supertest": "^7.1.0",
     "ts-jest": "^29.3.0",
-    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.28.0"
   }
