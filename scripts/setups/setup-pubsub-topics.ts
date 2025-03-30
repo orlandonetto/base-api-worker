@@ -17,10 +17,7 @@ const buildPubSubUrl = (endpoint?: string) => {
   return `${config.server.baseURL}${endpoint}`
 }
 
-async function createTopic(
-  pubsub: PubSub,
-  topicName: string,
-) {
+async function createTopic(pubsub: PubSub, topicName: string) {
   const [topics] = await pubsub.getTopics()
   const topicExists = topics.some(t => t.name.includes(topicName))
 
@@ -85,9 +82,7 @@ async function setupPubSub(company: TypeCompany) {
   // eslint-disable-next-line no-console
   console.log(`🔄 Configurando Pub/Sub do tenant ${company.tenantID}`)
 
-  const {
-    file: credentials,
-  } = company.credentials.gcp
+  const { file: credentials } = company.credentials.gcp
 
   const pubsub = new PubSub({
     credentials,
@@ -135,6 +130,6 @@ const run = async () => {
   process.exit(0)
 }
 
-; (async () => {
+;(async () => {
   await run()
 })()
